@@ -1,6 +1,5 @@
 .macro STUB_START module, flags_ver, stub_len
-
-	.section .rodata.sceResident, "a"
+	.section .rodata.sceResident, "a", @progbits
 	.word   0
 __stub_modulestr_\module:
 	.asciz  "\module"
@@ -13,31 +12,21 @@ __stub_modulestr_\module:
 	.word   __stub_idtable_\module
 	.word   __stub_text_\module
 
-	.section .rodata.sceNid, "a"
+	.section .rodata.sceNid, "a", @progbits
 __stub_idtable_\module:
 
 	.section .sceStub.text, "ax", @progbits
 __stub_text_\module:
-
 .endm
 
 .macro STUB_FUNC funcid, funcname
-
-        .set noreorder
-
 	.section .sceStub.text, "ax", @progbits
 	.globl  \funcname
-	.type   \funcname, @function
-	.ent    \funcname, 0
 \funcname:
 	jr	$ra
-	nop
-	.end    \funcname
-	.size   \funcname, .-\funcname
 
-	.section .rodata.sceNid
+	.section .rodata.sceNid, "a", @progbits
 	.word   \funcid
-
 .endm
 
 .macro STUB_END

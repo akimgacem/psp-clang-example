@@ -32,7 +32,7 @@ exports.o: exports.c
 	$(AS) exports.s $(ASFLAGS) -o $@
 
 imports.o: imports.s
-	psp-as $< -G0 -EL -no-mdebug -mno-pdr -o $@
+	$(AS) $< $(ASFLAGS) -o $@
 
 clean: 
 	rm -f $(TARGET).prx $(TARGET).elf PARAM.SFO EBOOT.PBP $(OBJS) main.s exports.s
