@@ -4,7 +4,7 @@
 #include "user/loadexec.h"
 #include "user/threadman.h"
 
-PSP_MODULE_INFO("clang_test", 0, 0, 1);
+PSP_MODULE_INFO("clang_test", PSP_MODULE_USER, 1, 1);
 
 int exit_callback(int arg1, int arg2, void *common) {
     sceKernelExitGame();
