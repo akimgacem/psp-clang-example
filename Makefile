@@ -6,7 +6,7 @@ AS=llvm-mc
 LD=psp-ld
 
 CFLAGS=-target mipsallegrexel-unknown-psp-elf -mabi=eabi -G0 -O2 -Wall -I./include
-ASFLAGS=-arch=mipsel -filetype=obj
+ASFLAGS=-triple=mipsallegrexel-unknown-psp-elf -filetype=obj
 LDFLAGS=-G0 -EL -q -T/opt/pspsdk/psp/sdk/lib/linkfile.prx
 
 all: EBOOT.PBP

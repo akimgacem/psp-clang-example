@@ -24,10 +24,10 @@ enum PspModuleInfoAttr {
 };
 
 #define PSP_MODULE_INFO(name, attributes, major_version, minor_version) \
-    const int __lib_ent_top __attribute__((section(".lib.ent.top"), align(4))) = 0; \
-    const int __lib_ent_bottom __attribute__((section(".lib.ent.btm"), align(4))) = 0; \
-    const int __lib_stub_top __attribute__((section(".lib.stub.top"), align(4))) = 0; \
-    const int __lib_stub_bottom __attribute__((section(".lib.stub.btm"), align(4))) = 0; \
+    const int __lib_ent_top __attribute__((section(".lib.ent.top"))) = 0; \
+    const int __lib_ent_bottom __attribute__((section(".lib.ent.btm"))) = 0; \
+    const int __lib_stub_top __attribute__((section(".lib.stub.top"))) = 0; \
+    const int __lib_stub_bottom __attribute__((section(".lib.stub.btm"))) = 0; \
     SceModuleInfo module_info __attribute__((section(".rodata.sceModuleInfo"), unused)) = { \
         attributes, {minor_version, major_version}, name, 0, _gp, \
         (void *) &__lib_ent_top + 4, (void *) &__lib_ent_bottom, \
