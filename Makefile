@@ -2,12 +2,12 @@ TARGET=clang_test
 OBJS=main.o exports.o imports.o
 
 CC=clang
-AS=llvm-mc
+AS=clang
 LD=psp-ld
 
-CFLAGS=-target mipsallegrexel-unknown-psp-elf -mabi=eabi -G0 -O2 -Wall -I./include
-ASFLAGS=-triple=mipsallegrexel-unknown-psp-elf -filetype=obj
-LDFLAGS=-G0 -EL -q -T/opt/pspsdk/psp/sdk/lib/linkfile.prx
+CFLAGS=-target mipsallegrexel-unknown-psp-elf -mabi=eabi -O2 -Wall -I./include -integrated-as
+ASFLAGS=-target mipsallegrexel-unknown-psp-elf -mabi=eabi -O2 -Wall -integrated-as -c
+LDFLAGS=-q -T/opt/pspsdk/psp/sdk/lib/linkfile.prx
 
 all: EBOOT.PBP
 
@@ -23,19 +23,8 @@ EBOOT.PBP: $(TARGET).prx PARAM.SFO
 $(TARGET).prx: $(TARGET).elf
 	psp-prxgen $< $@
 
-main.o: main.c
-	$(CC) $(CFLAGS) -S $<
-	$(AS) main.s $(ASFLAGS) -o $@
-
-exports.o: exports.c
-	$(CC) $(CFLAGS) -S $<
-	$(AS) exports.s $(ASFLAGS) -o $@
-
-imports.o: imports.s
-	$(AS) $< $(ASFLAGS) -o $@
-
 clean: 
-	rm -f $(TARGET).prx $(TARGET).elf PARAM.SFO EBOOT.PBP $(OBJS) main.s exports.s
+	rm -f $(TARGET).prx $(TARGET).elf PARAM.SFO EBOOT.PBP $(OBJS)
 
 rebuild: clean all
 
