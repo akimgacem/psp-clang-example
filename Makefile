@@ -5,9 +5,11 @@ CC=clang
 AS=clang
 LD=psp-ld
 
+SDK_PATH=`psp-config -p`
+
 CFLAGS=-target mipsallegrexel-unknown-psp-elf -mabi=eabi -O2 -Wall -I./include -integrated-as
 ASFLAGS=-target mipsallegrexel-unknown-psp-elf -mabi=eabi -O2 -Wall -integrated-as -c
-LDFLAGS=-q -T/opt/pspsdk/psp/sdk/lib/linkfile.prx
+LDFLAGS=-q -T $(SDK_PATH)/lib/linkfile.prx
 
 all: EBOOT.PBP
 
