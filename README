@@ -1,1 +1,5 @@
 Example PSP project using clang
+
+Works with unpatched Clang/LLVM 3.5
+Also requires psp-ld, psp-config, psp-prxgen, pbp-pack, and mksfo from the PSPSDK
+
